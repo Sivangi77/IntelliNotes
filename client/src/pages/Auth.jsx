@@ -2,6 +2,8 @@ import { motion } from "motion/react";
 import { FcGoogle } from "react-icons/fc";
 import { auth, provider } from "../utils/firebase";
 import { signInWithPopup } from "firebase/auth";
+import axios from "axios"
+import { serverUrl } from "../App";
 
 const Auth = () => {
 
@@ -11,6 +13,11 @@ const Auth = () => {
             const User= response.user;
             const name= User.displayName;
             const email= User.email;
+
+            const result= await axios.post(serverUrl+ "/api/auth/google", {name, email}, {
+                withCredentials: true
+            })
+            console.log(result.data);
 
         }catch(error){
             console.error("Error during Google authentication:", error);
