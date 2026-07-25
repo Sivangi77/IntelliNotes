@@ -2,8 +2,11 @@ import React from "react";
 import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import img1 from "../assets/img1.png";
+import Footer from "../components/Footer";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
+  const navigate=useNavigate()
   const features = [
     {
       icon: "📘",
@@ -60,7 +63,7 @@ export default function Home() {
           </p>
 
           <div className="mt-12 flex gap-5">
-            <button className="rounded-full bg-white px-8 py-4 font-semibold text-black shadow-xl transition hover:scale-105">
+            <button onClick={()=>{navigate("/notes")}} className="rounded-full bg-white px-8 py-4 font-semibold text-black shadow-xl transition hover:scale-105">
               Get Started
             </button>
 
@@ -124,6 +127,8 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <Footer/>
     </div>
   );
 }

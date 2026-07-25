@@ -105,7 +105,7 @@ export default function Navbar() {
                   <p className="mb-5 text-sm text-gray-400">
                     Purchase credits to generate AI notes, PDFs and diagrams.
                   </p>
-                  <button className="w-full rounded-2xl bg-white py-3 font-semibold text-black hover:bg-gray-200">
+                  <button onClick={()=>{setShowCredits(false);navigate("/pricing")}} className="w-full rounded-2xl bg-white py-3 font-semibold text-black hover:bg-gray-200">
                     Buy More Credits
                   </button>
                 </motion.div>
@@ -141,8 +141,7 @@ export default function Navbar() {
 
                   <div className="mt-3 flex flex-col gap-1">
                     <MenuItem text="👤 My Profile" onClick={() => {}} />
-                    <MenuItem text="⚙ Settings" onClick={() => {}} />
-                    <MenuItem text="📜 Purchase History" onClick={() => {}} />
+                    <MenuItem text="📜 History" onClick={() => {setShowProfile(false);navigate("/history")}} />
                     <MenuItem text="🚪 Logout" danger onClick={handleSignOut} />
                   </div>
                 </motion.div>
