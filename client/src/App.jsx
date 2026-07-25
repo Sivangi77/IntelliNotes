@@ -1,20 +1,25 @@
-import { Routes, Route } from "react-router-dom";
+import { Navigate, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Auth from "./pages/Auth";
 import { useEffect } from "react";
 import { getCurrentUser } from "./services/api";
+import { useDispatch,useSelector } from "react-redux";
 
 export const serverUrl = "http://localhost:8000"
 
 const App = () => {
+  const dispatch=useDispatch()
   useEffect(()=>{
-    getCurrentUser()
-  },[])
+    getCurrentUser(dispatch)
+  },[dispatch])
+
+  const {userData}=useSelector((state)=>state.user)
+
   return ( 
     <>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/auth" element={<Auth />} />
+        <Route path="/" element={userData? <Home />: <Navigate to="/auth" replace/>} />
+        <Route path="/auth" element={userData? <Navigate to="/" replace/> : <Auth />} />
       </Routes>
     </>
    );
